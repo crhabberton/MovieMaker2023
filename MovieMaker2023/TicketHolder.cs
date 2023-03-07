@@ -40,6 +40,33 @@ namespace MovieMaker2023
             this.age = newAge;
         }
 
+        public int GetTickets()
+        {
+            return numberTickets;
+        }
+
+        //get the snack order
+        public List<int> GetSnackOrder()
+        {
+            return snackOrder;
+        }
+        //get the snack order quantities
+        public List<int> GetSnackQuantity()
+        {
+            return snackQuantity;
+        }
+
+        //get the drinks order
+        public List<int> GetDrinkOrder()
+        {
+            return drinkOrder;
+        }
+        //get the drinks order quantities
+        public List<int> GetDrinkQuantity()
+        {
+            return drinkQuantity;
+        }
+
         //Sets the value of the private credit variable
         public void SetCredit(bool newPaymentType)
         {
@@ -137,10 +164,10 @@ namespace MovieMaker2023
         }
 
         //check if a surcharge is required
-        private bool GetSurcharge()
-        {
-            return credit;
-        }
+        //private bool GetSurcharge()
+        //{
+        //    return credit;
+        //}
 
         // return string displaying surcharge cost
         private string SurchargeSummary(List<float> sPrices, List<float> dPrices, float ticketPrice)
@@ -158,7 +185,7 @@ namespace MovieMaker2023
         // return the surcharge amount
         private float CalculateSurcharge(List<float> sPrices, List<float> dPrices, float ticketPrice)
         {
-            float surcharge = CalculateTotalCost(sPrices, dPrices, ticketPrice) * 0.2f;
+            float surcharge = CalculateTotalCost(sPrices, dPrices, ticketPrice) * 0.05f;
 
             return surcharge;
         }
@@ -188,8 +215,9 @@ namespace MovieMaker2023
         //returns a string diaplaying the reciept for the puchased items
         public string GenerateReciept(float tPrice, List<string> sList, List<float> sPrices, List<string> dList, List<float> dPrices)
         {
-            string reciept = $"Name: {name}\nAge: {age}\nPayment type: " + PaymentType() + "\n" + TicketSummary(tPrice) + SnackDrinkSummary(sList, sPrices, dList, dPrices) + "" +"\n"+SurchargeSummary(sPrices,dPrices,tPrice)+ 
-                "\n\n" + TotalPaymentSummary(sPrices,dPrices,tPrice);
+            string reciept = $"Name: {name}\nAge: {age}\nPayment Type: {PaymentType()}\n" +
+                $"{TicketSummary(tPrice)}\n{SnackDrinkSummary(sList, sPrices, dList, dPrices)}\n" +
+                $"{SurchargeSummary(sPrices, dPrices, tPrice)}\n{TotalPaymentSummary(sPrices,dPrices,tPrice)}";
 
 
 
@@ -200,7 +228,7 @@ namespace MovieMaker2023
         public override string ToString()
         {
 
-            return "";
+            return $"Name: {name}\tAge: {age}\tNoTickets: {numberTickets}";
         }
 
     }
