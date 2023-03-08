@@ -28,10 +28,26 @@ namespace MovieMaker2023
 
         }
 
+        // Return the seat limit
+
+        public int GetSeatLimit()
+        {
+            return SEATLIMIT;
+        } 
+
         //Adds a ticket holder into the ticketHolders list
         public void AddTicketHolder(TicketHolder ticketHolder)
         {
             ticketHolders.Add(ticketHolder);
+        }
+
+        //stores the snacks and drinks ordered by the most recent ticket holder
+        public void AddSnacksDrinksOrder(List<int> sOrder, List<int> sQuantity, List<int> dOrder, List<int> dQuantity)
+        {
+            // if index = list.count - 1 then it would refer to the last element in the list
+            ticketHolders[ticketHolders.Count - 1].AddSnacks(sOrder, sQuantity);
+            ticketHolders[ticketHolders.Count - 1].AddDrinks(dOrder, dQuantity);
+            
         }
 
         //returns true if purchaser's age meets the age requirement else it returns false
@@ -196,7 +212,7 @@ namespace MovieMaker2023
         public float CalculateTotalProfit()
         {
             // total profit = ticket profit + (snacks and drinks gross profit - cost of snacks and drinks)
-            return CalculateTicketGrossProfit() + (CalculateItemsGrossProfit() - CalculateSnackDrinkTotalCost());
+            return (float)Math.Round(CalculateTicketGrossProfit() + (CalculateItemsGrossProfit() - CalculateSnackDrinkTotalCost()),2);
         }
 
         //returns a string listing the total number for snacks purchased
@@ -206,7 +222,7 @@ namespace MovieMaker2023
 
             for (int snackIndex = 0; snackIndex < availableSnacks.Count; snackIndex++)
             {
-                summary += availableSnacks[snackIndex] + "\tX\t" + SumItemsSold("snacks")[snackIndex] + "\n";
+                summary += availableSnacks[snackIndex] + "   \tX\t" + SumItemsSold("snacks")[snackIndex] + "\n";
             }
 
             return summary;
@@ -220,7 +236,14 @@ namespace MovieMaker2023
 
         public override string ToString()
         {
-            return base.ToString();
+            string toString = "";
+
+            foreach (int age in ageLimits)
+            {
+                toString += age + "\n";
+            }
+
+            return toString;
         }
     }
 }

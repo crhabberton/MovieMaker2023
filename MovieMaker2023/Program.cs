@@ -45,8 +45,8 @@ namespace MovieMaker2023
             TicketManager tm = new TicketManager();
 
             string name = "Charlie";
-            int age = 11;
-            int tickets = 151;
+            int age = 12;
+            int tickets = 3;
 
             if(tm.CheckAge(age, 0))
             {
@@ -64,7 +64,10 @@ namespace MovieMaker2023
                 Console.WriteLine("You are too young to watch this movie");
             }
 
+            tm.AddSnacksDrinksOrder(s, sq, d, dq);
 
+
+            Console.WriteLine($"Total nummber of seats sold: {tm.GetSeatLimit()-tm.CalculateAvailableSeats()}\n");
 
             Console.ReadLine();
         }
